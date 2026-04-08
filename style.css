@@ -759,6 +759,11 @@ img { max-width: 100%; display: block; }
   border-color: #a2ff03 !important;
 }
 
+.fc-list-event-dot {
+   background-color: #a2ff03 !important;
+   border-color:#a2ff03 !important;
+}
+
 .fc-event-selected {
   background-color: #007bff !important;
   border-color: #007bff !important;

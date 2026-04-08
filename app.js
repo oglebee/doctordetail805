@@ -223,12 +223,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmBtn = document.getElementById('confirmBooking');
   if (confirmBtn) {
     confirmBtn.addEventListener('click', async () => {
-      const name = document.getElementById('clientName').value;
-      const phone = document.getElementById('clientPhone').value;
-      const msg = document.getElementById('clientMessage').value;
+      const name = document.getElementById('bookingName').value;
+      const phone = document.getElementById('bookingPhone').value;
+      const msg = document.getElementById('bookingMessage').value;
       const status = document.getElementById('formStatus');
 
-      if (!isValidUSPhone(phone) || msg.length < 5) {
+      if (!isValidUSPhone(phone) || msg.trim().length < 5) {
         status.innerText = "❌ Please provide a valid phone and service description.";
         return;
       }

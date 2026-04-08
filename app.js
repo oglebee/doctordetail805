@@ -214,13 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
           bookingForm.scrollIntoView({ behavior: 'smooth' });
         }
       },
-      eventDidMount: function(info) {
-        const title = info.event.title.toUpperCase();
-        if (title.includes('AVAILABLE') || title.includes('OPEN')) {
-          info.el.style.backgroundColor = 'green';
-          info.el.style.borderColor = 'green';
-        }
-      },
       headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' }
     });
     window.calendarInstance.render();

@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (calendarEl) {
     window.calendarInstance = new FullCalendar.Calendar(calendarEl, {
-      initialView: window.innerWidth <= 768 ? 'listeWeek' : 'dayGridMonth',
+      initialView: window.innerWidth <= 768 ? 'listWeek' : 'dayGridMonth',
       events: APPS_SCRIPT_URL,
       eventClick: function(info) {
         info.jsEvent.preventDefault();
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
           bookingForm.scrollIntoView({ behavior: 'smooth' });
         }
       },
-      headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' }
+      headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' },
       // FIX: show full date in list view (not just time)
       listDayFormat: { weekday: 'short', month: 'short', day: 'numeric' },
 

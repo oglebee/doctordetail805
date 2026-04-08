@@ -737,6 +737,10 @@ img { max-width: 100%; display: block; }
   border-color: yellow !important;
 }
 
+.fc-daygrid-event {
+  cursor: pointer;
+}
+
 /* Form visibility transition */
 #booking-form {
   border-top: 2px solid var(--accent);

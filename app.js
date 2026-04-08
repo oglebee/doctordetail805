@@ -205,8 +205,15 @@ document.addEventListener('DOMContentLoaded', () => {
       events: APPS_SCRIPT_URL,
       eventClick: function(info) {
         info.jsEvent.preventDefault();
+
+        // Remove highlight from previous selection
+        const prev = document.querySelector('.fc-event-selected');
+        if (prev) prev.classList.remove('fc-event-selected');
+      
+        // Add highlight to this event
+        info.el.classList.add('fc-event-selected');
+      
         const title = info.event.title.toUpperCase();
-        
         if (title.includes('AVAILABLE') || title.includes('OPEN')) {
           selectedStartTime = info.event.startStr;
           slotTitle.innerText = "Selected: " + info.event.start.toLocaleDateString() + " @ " + info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});

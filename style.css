@@ -769,6 +769,11 @@ img { max-width: 100%; display: block; }
   border-color: #007bff !important;
 }
 
+.fc-list-event.fc-event-selected {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 .fc-daygrid-event {
   cursor: pointer;
 }

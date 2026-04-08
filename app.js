@@ -205,14 +205,14 @@ document.addEventListener('DOMContentLoaded', () => {
       events: APPS_SCRIPT_URL,
       eventClick: function(info) {
         info.jsEvent.preventDefault();
-
+         
         // Remove highlight from previous selection
         const prev = document.querySelector('.fc-event-selected');
         if (prev) prev.classList.remove('fc-event-selected');
-      
+    
         // Add highlight to this event
         info.el.classList.add('fc-event-selected');
-      
+    
         const title = info.event.title.toUpperCase();
         if (title.includes('AVAILABLE') || title.includes('OPEN')) {
           selectedStartTime = info.event.startStr;
@@ -222,8 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       },
       headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' },
-      // FIX: show full date in list view (not just time)
-      listDayFormat: { weekday: 'short', month: 'short', day: 'numeric' },
+
+      // FIX: show full date in list view (weekday + MM/DD)
+      listDayFormat: { weekday: 'short', month: '2-digit', day: '2-digit' },
+      listDaySideFormat: false,
 
       // FIX: clean readable time format
       eventTimeFormat: {

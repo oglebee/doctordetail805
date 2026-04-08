@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Detail 805 – Mobile Auto Detailing</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       SIDEBAR NAV (desktop)
+  ══════════════════════════════════════════ -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">🩺</span>
+      <span class="logo-text">Dr. Detail</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active" data-page="home">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </span>
+        <span class="nav-label">Home</span>
+      </a></li>
+
+      <li><a href="#pictures" class="nav-link" data-page="pictures">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </span>
+        <span class="nav-label">Pictures</span>
+      </a></li>
+
+      <li><a href="#book" class="nav-link" data-page="book">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </span>
+        <span class="nav-label">Book Now</span>
+      </a></li>
+
+      <li><a href="#reviews" class="nav-link" data-page="reviews">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <span class="nav-label">Reviews</span>
+      </a></li>
+    </ul>
+
+    <div class="nav-bottom">
+      <button class="nav-link accessibility-btn" id="themeToggle" title="Toggle light/dark mode">
+        <span class="nav-icon" id="themeIcon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </span>
+        <span class="nav-label">Light Mode</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       BOTTOM NAV (mobile)
+  ══════════════════════════════════════════ -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#home" class="mob-link active" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#pictures" class="mob-link" data-page="pictures">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Photos</span>
+    </a>
+    <a href="#book" class="mob-link" data-page="book">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span>Book</span>
+    </a>
+    <a href="#reviews" class="mob-link" data-page="reviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span>Reviews</span>
+    </a>
+    <button class="mob-link" id="mobileThemeToggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span>Theme</span>
+    </button>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════ -->
+  <main class="content" id="mainContent">
+
+    <!-- ── HOME PAGE ── -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-badge">Ventura County's #1 Mobile Detail</div>
+        <h1 class="hero-title">DR. DETAIL<span class="accent">805</span></h1>
+        <p class="hero-sub">We come to you. Show your car who's doctor.</p>
+        <a href="#book" class="cta-btn" data-page="book">Book Now →</a>
+      </div>
+
+      <div class="services-section">
+        <h2 class="section-title">Services</h2>
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-icon">🚗</div>
+            <h3>Exterior Wash & Detail</h3>
+            <p>Full hand wash, clay bar treatment, tire dressing, window cleaning, and exterior trim restoration.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🪑</div>
+            <h3>Interior Detail</h3>
+            <p>Deep vacuum, shampoo of seats & carpets, dashboard wipe-down, door jambs, and odor elimination.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">✨</div>
+            <h3>Full Detail Package</h3>
+            <p>The complete experience — interior + exterior combined. Your car leaves looking showroom-fresh.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🪞</div>
+            <h3>Paint Correction</h3>
+            <p>Single & multi-stage machine polishing to remove swirl marks, scratches, and oxidation.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🛡️</div>
+            <h3>Ceramic Coating</h3>
+            <p>Long-lasting nano-ceramic protection that repels water, UV rays, and contaminants for years.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🚙</div>
+            <h3>Engine Bay Cleaning</h3>
+            <p>Degreasing and detailing your engine bay for a clean, professional-looking under-hood appearance.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🪟</div>
+            <h3>Headlight Restoration</h3>
+            <p>Restore clarity to foggy, yellowed headlights — improving both looks and nighttime visibility.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🏎️</div>
+            <h3>Dealership Prep</h3>
+            <p>Pre-sale prep detailing for private sellers and dealerships. Make a strong first impression.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="home-book-cta">
+        <p>Ready to get your car looking like new?</p>
+        <a href="#book" class="cta-btn" data-page="book">Book Now →</a>
+      </div>
+
+      <footer class="page-footer">
+        <a href="https://www.instagram.com/drdetail805/" target="_blank" rel="noopener" class="ig-link">
+          <svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @drdetail805
+        </a>
+        <p class="footer-copy">© 2025 Dr. Detail 805 · Ventura County, CA</p>
+      </footer>
+    </section>
+
+    <!-- ── PICTURES PAGE ── -->
+    <section class="page" id="page-pictures">
+      <div class="page-header">
+        <h1 class="page-title">The Work</h1>
+        <p class="page-sub">Before & after. The proof is in the polish.</p>
+      </div>
+
+      <div class="ig-cta-block">
+        <a href="https://www.instagram.com/drdetail805/" target="_blank" rel="noopener" class="ig-big-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          See All Photos on Instagram
+          <span class="ig-handle">@drdetail805</span>
+        </a>
+      </div>
+
+      <div class="gallery-placeholder">
+        <div class="gallery-card placeholder-card">
+          <div class="ph-inner">📷 Add your before/after photos here</div>
+        </div>
+        <div class="gallery-card placeholder-card">
+          <div class="ph-inner">📷 Replace with real images</div>
+        </div>
+        <div class="gallery-card placeholder-card">
+          <div class="ph-inner">📷 Replace with real images</div>
+        </div>
+        <div class="gallery-card placeholder-card">
+          <div class="ph-inner">📷 Replace with real images</div>
+        </div>
+        <div class="gallery-card placeholder-card">
+          <div class="ph-inner">📷 Replace with real images</div>
+        </div>
+        <div class="gallery-card placeholder-card">
+          <div class="ph-inner">📷 Replace with real images</div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <a href="https://www.instagram.com/drdetail805/" target="_blank" rel="noopener" class="ig-link">
+          <svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @drdetail805
+        </a>
+        <p class="footer-copy">© 2025 Dr. Detail 805 · Ventura County, CA</p>
+      </footer>
+    </section>
+
+    <!-- ── BOOK NOW PAGE ── -->
+    <section class="page" id="page-book">
+      <div class="page-header">
+        <h1 class="page-title">Book Now</h1>
+        <p class="page-sub">Call or text, or fill out the form below.</p>
+      </div>
+
+      <div class="book-phone-block">
+        <a href="tel:8056639182" class="phone-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (805) 663-9182
+        </a>
+        <p class="phone-hint">Call or text anytime — we're mobile and ready.</p>
+      </div>
+
+      <div class="inquiry-form-wrap">
+        <h2>Send an Inquiry</h2>
+        <p class="form-note">Fill out the form and we'll text you back ASAP.</p>
+
+        <div class="form-group">
+          <label for="clientName">Your Name</label>
+          <input type="text" id="clientName" placeholder="Jane Smith" />
+        </div>
+
+        <div class="form-group">
+          <label for="clientPhone">Your Phone Number <span class="required">*</span></label>
+          <input type="tel" id="clientPhone" placeholder="(805) 555-1234" maxlength="14" />
+          <span class="field-error" id="phoneError">Please enter a valid US phone number.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="clientMessage">Your Inquiry <span class="required">*</span></label>
+          <textarea id="clientMessage" rows="5" placeholder="Tell us what service you need, your vehicle type, location, and preferred date/time..."></textarea>
+          <span class="field-error" id="msgError">Please describe your inquiry.</span>
+        </div>
+
+        <button class="cta-btn send-btn" id="sendInquiry">Send Inquiry via SMS</button>
+        <p class="sms-note">This opens your SMS app with the message pre-filled to <strong>(805) 663-9182</strong>.</p>
+      </div>
+
+      <footer class="page-footer">
+        <a href="https://www.instagram.com/drdetail805/" target="_blank" rel="noopener" class="ig-link">
+          <svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @drdetail805
+        </a>
+        <p class="footer-copy">© 2025 Dr. Detail 805 · Ventura County, CA</p>
+      </footer>
+    </section>
+
+    <!-- ── REVIEWS PAGE ── -->
+    <section class="page" id="page-reviews">
+      <div class="page-header">
+        <h1 class="page-title">Reviews</h1>
+        <p class="page-sub">Don't take our word for it.</p>
+      </div>
+
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"My car looks better than the day I bought it. Showed up on time, worked fast, and the ceramic coating is incredible. Highly recommend!"</p>
+          <div class="reviewer">— Mike T., Oxnard</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Got the full detail package. Interior was destroyed from my kids — he made it look brand new. Worth every penny, will be back every month."</p>
+          <div class="reviewer">— Sarah L., Ventura</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Paint correction removed swirl marks I thought were permanent. The guy is a legit professional. Best detail in the 805, no contest."</p>
+          <div class="reviewer">— Carlos R., Camarillo</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Super convenient that he comes to you. Texted him, scheduled same week, and the results were amazing. My truck looks fresher than ever."</p>
+          <div class="reviewer">— James H., Thousand Oaks</div>
+        </div>
+
+      </div>
+
+      <div class="review-cta">
+        <p>Happy with the results?</p>
+        <a href="https://www.google.com/maps/search/Dr+Detail+805" target="_blank" rel="noopener" class="cta-btn">Leave a Google Review →</a>
+      </div>
+
+      <footer class="page-footer">
+        <a href="https://www.instagram.com/drdetail805/" target="_blank" rel="noopener" class="ig-link">
+          <svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @drdetail805
+        </a>
+        <p class="footer-copy">© 2025 Dr. Detail 805 · Ventura County, CA</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

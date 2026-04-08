@@ -474,6 +474,21 @@ img { max-width: 100%; display: block; }
   padding: 30px 60px 50px;
   max-width: 640px;
 }
+/* ── BOOKING PAGE FLEX LAYOUT ── */
+#booking-wrap {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+#calendar-container {
+  flex: 1;
+}
+
+#booking-form {
+  flex: 1;
+}
+
 .inquiry-form-wrap h2 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
@@ -698,6 +713,18 @@ img { max-width: 100%; display: block; }
   }
   .reviews-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* ── BOOKING PAGE STACKING ── */
+  #booking-wrap {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  #calendar-container,
+  #booking-form {
+    flex: unset;
+    min-width: 100%;
   }
 }
 

@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const pages = document.querySelectorAll('.page');
   const navLinks = document.querySelectorAll('.nav-link[data-page]');
   const mobLinks = document.querySelectorAll('.mob-link[data-page]');
-  const CAL_ID = '27667c11cb2ac9d99746dede9367f84f02f53b2701f8598ba4a8746c909aa564@group.calendar.google.com';
-  const CAL_API_KEY = 'AIzaSyC8gLBaRIKXxT0VptTst88T0OL1Nz0xEoQ';
+  const CAL_ID = '...';
+  const CAL_API_KEY = '...';
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnmWit2Kf6x2akuLyZRwZHDSAt69XbgJdydjbvI4kZzEXOEJ7xse24cALPbgOZqxmm1g/exec'; 
 
   function showPage(pageId) {
@@ -201,9 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (calendarEl) {
     window.calendarInstance = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'listWeek',
-      googleCalendarApiKey: CAL_API_KEY,
-      events: CAL_ID,
+      initialView: 'dayGridMonth',
+      events: APPS_SCRIPT_URL,
       eventClick: function(info) {
         info.jsEvent.preventDefault();
         const title = info.event.title.toUpperCase();

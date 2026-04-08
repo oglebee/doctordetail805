@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const pages = document.querySelectorAll('.page');
   const navLinks = document.querySelectorAll('.nav-link[data-page]');
   const mobLinks = document.querySelectorAll('.mob-link[data-page]');
+  const CAL_ID = '27667c11cb2ac9d99746dede9367f84f02f53b2701f8598ba4a8746c909aa564@group.calendar.google.com';
+  const CAL_API_KEY = 'AIzaSyC8gLBaRIKXxT0VptTst88T0OL1Nz0xEoQ';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwiS3U3HDwoDGadNxWVW2Vq74uZeBFcel8jG3Az101zGRh53Ry7JLLe8X-LDhJoOlCY/exec '; 
 
   function showPage(pageId) {
     pages.forEach(p => p.classList.remove('active'));
@@ -182,5 +185,63 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+   
+  // ── CALENDAR & BOOKING LOGIC ────────────────
+  const calendarEl = document.getElementById('calendar');
+  const bookingForm = document.getElementById('booking-form');
+  const slotTitle = document.getElementById('selected-slot-title');
+  let selectedStartTime = null;
 
+  if (calendarEl) {
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'listWeek',
+      googleCalendarApiKey: CAL_API_KEY,
+      events: CAL_ID,
+      eventClick: function(info) {
+        info.jsEvent.preventDefault();
+        const title = info.event.title.toUpperCase();
+        
+        if (title.includes('AVAILABLE') || title.includes('OPEN')) {
+          selectedStartTime = info.event.startStr;
+          slotTitle.innerText = "Selected: " + info.event.start.toLocaleDateString() + " @ " + info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+          bookingForm.style.display = 'block';
+          bookingForm.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
+      headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' }
+    });
+    calendar.render();
+  }
+
+  const confirmBtn = document.getElementById('confirmBooking');
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', async () => {
+      const name = document.getElementById('clientName').value;
+      const phone = document.getElementById('clientPhone').value;
+      const msg = document.getElementById('clientMessage').value;
+      const status = document.getElementById('formStatus');
+
+      if (!isValidUSPhone(phone) || msg.length < 5) {
+        status.innerText = "❌ Please provide a valid phone and service description.";
+        return;
+      }
+
+      status.innerText = "⏳ Sending to Doctor Detail...";
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({
+            startTime: selectedStartTime,
+            description: `${name} - ${msg}`,
+            phone: phone
+          })
+        });
+        status.innerText = "✅ Request Sent! Check your phone for a confirmation text soon.";
+      } catch (e) {
+        status.innerText = "❌ Connection error. Please text us directly!";
+      }
+    });
+  }
 });

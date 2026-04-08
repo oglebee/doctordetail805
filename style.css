@@ -729,6 +729,7 @@ img { max-width: 100%; display: block; }
 
 .fc-daygrid-event-dot {
   background-color: green !important;
+  border-color: green !important;
 }
 
 .fc-event-selected {

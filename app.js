@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobLinks = document.querySelectorAll('.mob-link[data-page]');
   const CAL_ID = '27667c11cb2ac9d99746dede9367f84f02f53b2701f8598ba4a8746c909aa564@group.calendar.google.com';
   const CAL_API_KEY = 'AIzaSyC8gLBaRIKXxT0VptTst88T0OL1Nz0xEoQ';
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYiBhpI3SxQXwb2FjdqdfgicrUdBCOHEeEWN0fslILT_GeBiMVGcbxZA4Zt7OgvaWP/exec'; 
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnmWit2Kf6x2akuLyZRwZHDSAt69XbgJdydjbvI4kZzEXOEJ7xse24cALPbgOZqxmm1g/exec'; 
 
   function showPage(pageId) {
     pages.forEach(p => p.classList.remove('active'));

@@ -30,6 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (l.dataset.page === pageId) l.classList.add('active');
     });
 
+    // --- FIX CALENDAR RENDERING ---
+    if (pageId === 'book' && window.calendarInstance) {
+      setTimeout(() => {
+        window.calendarInstance.updateSize();
+      }, 50);
+    }
+
     // Scroll to top of content on page change
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -186,14 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
    
-  // ── CALENDAR & BOOKING LOGIC ────────────────
+// ── CALENDAR & BOOKING LOGIC ────────────────
   const calendarEl = document.getElementById('calendar');
   const bookingForm = document.getElementById('booking-form');
   const slotTitle = document.getElementById('selected-slot-title');
   let selectedStartTime = null;
 
   if (calendarEl) {
-    const calendar = new FullCalendar.Calendar(calendarEl, {
+    window.calendarInstance = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
       googleCalendarApiKey: CAL_API_KEY,
       events: CAL_ID,
@@ -210,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' }
     });
-    calendar.render();
+    window.calendarInstance.render();
   }
 
   const confirmBtn = document.getElementById('confirmBooking');

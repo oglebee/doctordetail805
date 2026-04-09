@@ -193,44 +193,105 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
    
-// ── CALENDAR & BOOKING LOGIC ────────────────
+  // ── CALENDAR & BOOKING LOGIC ────────────────
   const calendarEl = document.getElementById('calendar');
   const bookingForm = document.getElementById('booking-form');
   const slotTitle = document.getElementById('selected-slot-title');
   let selectedStartTime = null;
+  // Track the currently selected event ID so we can manage state ourselves
+  let selectedEventId = null;
+
+  // Helper: format a Date into "Thu 04/09 12P" style
+  function formatSlotLabel(date) {
+    const weekday = date.toLocaleDateString('en-US', { weekday: 'short' }); // "Thu"
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'P' : 'A';
+    hours = hours % 12 || 12;
+    const timeStr = minutes === 0
+      ? `${hours}${ampm}`
+      : `${hours}:${String(minutes).padStart(2, '0')}${ampm}`;
+    return `${weekday} ${month}/${day} ${timeStr}`;
+  }
 
   if (calendarEl) {
     window.calendarInstance = new FullCalendar.Calendar(calendarEl, {
       initialView: window.innerWidth <= 768 ? 'listWeek' : 'dayGridMonth',
       events: APPS_SCRIPT_URL,
-      eventClick: function(info) {
-        info.jsEvent.preventDefault();
 
-        const prev = document.querySelector('.fc-event-selected');
-        if (prev) prev.classList.remove('fc-event-selected');
-
-        info.el.classList.add('fc-event-selected');
-
-        const title = info.event.title.toUpperCase();
-        if (title.includes('AVAILABLE') || title.includes('OPEN')) {
-          selectedStartTime = info.event.startStr;
-          slotTitle.innerText = "Selected: " +
-            info.event.start.toLocaleDateString() + " @ " +
-            info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-          bookingForm.style.display = 'block';
-          bookingForm.scrollIntoView({ behavior: 'smooth' });
-        }
-      },
       headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' },
 
-      listDayFormat: { weekday: 'short', month: '2-digit', day: '2-digit' }, 
+      // These control the day-header rows in list view (the "Thu 4/10" section headers)
+      listDayFormat: { weekday: 'short', month: '2-digit', day: '2-digit' },
       listDaySideFormat: false,
 
       eventTimeFormat: {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true
-      }
+      },
+
+      // FIX #2: Override the list event rendering to show "Thu 04/09 12P" in the title cell
+      // We inject the date+time prefix into the event title for list view only
+      eventContent: function(arg) {
+        if (arg.view.type === 'listWeek') {
+          const label = formatSlotLabel(arg.event.start);
+          // Build a custom element: date+time label + event title
+          const container = document.createElement('div');
+          container.classList.add('fc-custom-list-item');
+          container.innerHTML = `<span class="fc-custom-slot-label">${label}</span><span class="fc-custom-slot-title">${arg.event.title}</span>`;
+          return { domNodes: [container] };
+        }
+        // Default rendering for month/other views
+        return true;
+      },
+
+      // FIX #5 & #1: Robust click handler that works on mobile touch too
+      // We manage our own selected state via data attribute to avoid FC internal conflicts
+      eventClick: function(info) {
+        info.jsEvent.preventDefault();
+        info.jsEvent.stopPropagation();
+
+        const clickedId = info.event.id || info.event.startStr;
+
+        // If clicking the already-selected event, deselect it
+        if (selectedEventId === clickedId) {
+          selectedEventId = null;
+          selectedStartTime = null;
+          // Remove selected style from all list rows
+          document.querySelectorAll('.fc-list-event[data-selected]').forEach(el => {
+            el.removeAttribute('data-selected');
+          });
+          slotTitle.innerText = 'Selected: --';
+          bookingForm.style.display = 'none';
+          return;
+        }
+
+        // Deselect previous
+        document.querySelectorAll('.fc-list-event[data-selected]').forEach(el => {
+          el.removeAttribute('data-selected');
+        });
+        // Also clear any lingering FC-managed selected class
+        document.querySelectorAll('.fc-event-selected').forEach(el => {
+          el.classList.remove('fc-event-selected');
+        });
+
+        selectedEventId = clickedId;
+
+        // Mark the clicked row - for list view the el is the <tr>
+        info.el.setAttribute('data-selected', 'true');
+
+        const title = info.event.title.toUpperCase();
+        if (title.includes('AVAILABLE') || title.includes('OPEN')) {
+          selectedStartTime = info.event.startStr;
+          const label = formatSlotLabel(info.event.start);
+          slotTitle.innerText = `Selected: ${label}`;
+          bookingForm.style.display = 'block';
+          bookingForm.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
     });
     window.calendarInstance.render();
   }

@@ -205,29 +205,27 @@ document.addEventListener('DOMContentLoaded', () => {
       events: APPS_SCRIPT_URL,
       eventClick: function(info) {
         info.jsEvent.preventDefault();
-         
-        // Remove highlight from previous selection
+
         const prev = document.querySelector('.fc-event-selected');
         if (prev) prev.classList.remove('fc-event-selected');
-    
-        // Add highlight to this event
+
         info.el.classList.add('fc-event-selected');
-    
+
         const title = info.event.title.toUpperCase();
         if (title.includes('AVAILABLE') || title.includes('OPEN')) {
           selectedStartTime = info.event.startStr;
-          slotTitle.innerText = "Selected: " + info.event.start.toLocaleDateString() + " @ " + info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+          slotTitle.innerText = "Selected: " +
+            info.event.start.toLocaleDateString() + " @ " +
+            info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
           bookingForm.style.display = 'block';
           bookingForm.scrollIntoView({ behavior: 'smooth' });
         }
       },
       headerToolbar: { left: 'prev,next', center: 'title', right: 'listWeek,dayGridMonth' },
 
-      // FIX: show full date in list view (weekday + MM/DD)
-      listDayFormat: { weekday: 'short', month: '2-digit', day: '2-digit' },
+      listDayFormat: { weekday: 'short', month: '2-digit', day: '2-digit' }, 
       listDaySideFormat: false,
 
-      // FIX: clean readable time format
       eventTimeFormat: {
         hour: 'numeric',
         minute: '2-digit',

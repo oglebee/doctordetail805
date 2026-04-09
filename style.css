@@ -759,6 +759,16 @@ img { max-width: 100%; display: block; }
   border-color: #a2ff03 !important;
 }
 
+/* Force the list view to be flush left */
+.fc-list-event td.fc-list-event-time,
+.fc-list-event td.fc-list-event-graphic,
+.fc-list-event td.fc-list-event-title {
+  padding: 0.25em 0.5em !important; /* tighten spacing */
+}
+
+.fc-list-event.fc-event-selected td.fc-list-event-title a {
+  color: #fff !important; /* selected text visible */
+}
 .fc-list-event-dot {
    background-color: #a2ff03 !important;
    border-color:#a2ff03 !important;

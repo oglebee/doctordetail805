@@ -770,7 +770,15 @@ img { max-width: 100%; display: block; }
 }
 
 .fc-list-event.fc-event-selected {
+  background-color: #007bff !important;
+  color: #fff !important;
   margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Remove extra table padding/indent */
+.fc-list-event.fc-event-start,
+.fc-list-event.fc-event-end {
   padding-left: 0 !important;
 }
 

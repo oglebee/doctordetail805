@@ -26,6 +26,10 @@
   --sidebar-width-collapsed: 64px;
   --sidebar-width-expanded: 220px;
   --transition: 0.2s ease;
+
+  /* Calendar selection blue */
+  --cal-selected: #007bff;
+  --cal-selected-hover: #0069d9;
 }
 
 [data-theme="light"] {
@@ -474,6 +478,7 @@ img { max-width: 100%; display: block; }
   padding: 30px 60px 50px;
   max-width: 640px;
 }
+
 /* ── BOOKING PAGE FLEX LAYOUT ── */
 #booking-wrap {
   display: flex;
@@ -726,6 +731,15 @@ img { max-width: 100%; display: block; }
     flex: unset;
     min-width: 100%;
   }
+
+  /* FIX #4: Kill all indent on list rows on mobile */
+  .fc-list-table td {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .fc-list-event-graphic {
+    display: none !important; /* hides the dot column that contributes to indent */
+  }
 }
 
 @media (max-width: 480px) {
@@ -735,70 +749,115 @@ img { max-width: 100%; display: block; }
   .hero-title { font-size: 3.2rem; }
 }
 
-/* Calendar Styling */
+/* ══════════════════════════════════════════
+   CALENDAR STYLING
+   All fixes consolidated here — no duplication
+══════════════════════════════════════════ */
+
 #calendar-container {
-  background: var(--card-bg); /* Uses your existing theme variables */
+  background: var(--card);
   border-radius: 12px;
   padding: 15px;
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
+  border: 1px solid var(--border);
+  color: var(--text);
   margin-bottom: 2rem;
 }
 
-/* Make the list view look clean on mobile */
-.fc-list-event {
-  cursor: pointer !important;
+/* ── FIX #6: Month grid — clip event text inside cell like Excel ── */
+.fc-daygrid-day {
+  overflow: hidden;
+}
+.fc-daygrid-event {
+  cursor: pointer;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+.fc-daygrid-event .fc-event-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* The event wrapper inside a cell must not overflow its column */
+.fc-daygrid-event-harness {
+  overflow: hidden;
 }
 
-.fc-list-event:hover {
-  background-color: rgba(var(--accent-rgb), 0.1) !important;
+/* ── FIX #1: List view hover — use blue, target td children ── */
+/* Default unselected row hover: subtle blue tint */
+.fc-list-event:hover td {
+  background-color: rgba(0, 123, 255, 0.15) !important;
+  cursor: pointer;
 }
 
-.fc-daygrid-event-dot {
+/* ── FIX #1 & #5: Selected row styling via data-selected attribute ── */
+/* We use data-selected instead of .fc-event-selected to avoid FC's internal conflicts */
+.fc-list-event[data-selected="true"] td {
+  background-color: var(--cal-selected) !important;
+  color: #fff !important;
+}
+.fc-list-event[data-selected="true"] td a,
+.fc-list-event[data-selected="true"] td .fc-list-event-time,
+.fc-list-event[data-selected="true"] td .fc-custom-list-item,
+.fc-list-event[data-selected="true"] td .fc-custom-slot-label,
+.fc-list-event[data-selected="true"] td .fc-custom-slot-title {
+  color: #fff !important;
+}
+/* Selected row hover: slightly darker blue */
+.fc-list-event[data-selected="true"]:hover td {
+  background-color: var(--cal-selected-hover) !important;
+}
+
+/* Neutralize FC's own .fc-event-selected styles so they don't fight us */
+.fc-event-selected,
+.fc-event-selected:hover {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── FIX #2: Custom list item layout (date+time label + title) ── */
+.fc-custom-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+  overflow: hidden;
+}
+.fc-custom-slot-label {
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+}
+.fc-custom-slot-title {
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.875rem;
+}
+/* When the row is selected, both parts go white */
+.fc-list-event[data-selected="true"] .fc-custom-slot-title {
+  color: rgba(255,255,255,0.8) !important;
+}
+
+/* ── Dot colors ── */
+.fc-daygrid-event-dot,
+.fc-list-event-dot {
   background-color: #a2ff03 !important;
   border-color: #a2ff03 !important;
 }
 
-/* Force the list view to be flush left */
-.fc-list-event td.fc-list-event-time,
-.fc-list-event td.fc-list-event-graphic,
-.fc-list-event td.fc-list-event-title {
-  padding: 0.25em 0.5em !important; /* tighten spacing */
+/* ── List cursor ── */
+.fc-list-event {
+  cursor: pointer !important;
 }
 
-.fc-list-event.fc-event-selected td.fc-list-event-title a {
-  color: #fff !important; /* selected text visible */
-}
-.fc-list-event-dot {
-   background-color: #a2ff03 !important;
-   border-color:#a2ff03 !important;
-}
-
-.fc-event-selected {
-  background-color: #007bff !important;
-  border-color: #007bff !important;
-}
-
-.fc-list-event.fc-event-selected {
-  background-color: #007bff !important;
-  color: #fff !important;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-/* Remove extra table padding/indent */
-.fc-list-event.fc-event-start,
-.fc-list-event.fc-event-end {
-  padding-left: 0 !important;
-}
-
-.fc-daygrid-event {
-  cursor: pointer;
-}
-
-/* Form visibility transition */
+/* ── Form visibility ── */
 #booking-form {
-  border-top: 2px solid var(--accent);
+  border-top: 2px solid var(--lime);
   padding-top: 2rem;
   animation: fadeIn 0.4s ease-out;
 }
